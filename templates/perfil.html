@@ -1,0 +1,26 @@
+<h5>{%if user.is_authenticated%} Está logado o usuario: <strong>{{user.username}}</strong>{%endif%}</h5>
+<h5>Empresa: {{empresa.nome}}</h5>
+<p>Nome da empresa: {{ empresa.nome }}</p>
+
+<button onclick="location.href='{% url 'logout' %}'">Sair</button>
+
+<button onclick="location.href='{% url 'prof' %}'">criar profissional</button>
+
+<button onclick="location.href='{% url 'servi' %}'">criar serviços</button>
+
+<button onclick="location.href='{% url 'horario' %}'">criar horarios</button>
+
+<h3>profissionais</h3>
+{% for pro in profissionais %}
+<h5>{{ pro.nome }}</h5>
+<h5>{{ pro.especialidade }}</h5>
+{% endfor %}
+
+<h3>horarios</h3>
+{% for ho in horarios %}
+<h5>{{ ho.hora_abertura }}</h5>
+<h5>{{ ho.duracao_minutos }}</h5>
+{% endfor %}
+
+
+<p>Senja bem vindo</p>

@@ -1,0 +1,9 @@
+{% extends 'visivel/base.html' %}
+{%block content%} 
+<h1>Profissionais para o serviço de {{ servico.servico }}</h1>
+<ul>
+    {% for profissional in profissionais %}
+    <li>{{ profissional.nome }}</li>
+    {% endfor %}
+</ul>
+{%endblock%}

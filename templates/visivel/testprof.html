@@ -1,0 +1,64 @@
+{% extends 'visivel/base.html' %}
+{%block content%} 
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+      <div class="menu-content">
+        <div class="menu-title-wrapper">
+          <h3>Confira nossos profissionais!</h3>
+        </div>
+            <!-- busca  
+        <div class="menu-filter">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="O que deseja?"
+          />
+          <button class="search-button">Buscar</button>
+        </div>
+           -->
+  <!-- MENU CARDS -->
+<div class="menu-card-wrapper">
+  <!-- Massas -->
+  {% for pro in profissionais %}
+  <div class="menu-card-item pizza ativo">
+        <img src="{{ pro.imagem.url }}" width="168" height="168"/>
+      <div class="menu-card-content">
+        <h3>{{ pro.nome }}</h3>
+        <p>
+          {{ pro.especialidade }}
+          <br>
+        </p>
+        <button type="button" class="adicionar-ao-carrinho" data-produto-id="{{ produto.id }}">Ver quadro de hora!</button>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+    <!-- Footer 
+    <footer>
+      <div class="footer-main cartoon">
+          <div class="footer-content">
+              <div class="footer-company cartoon">
+                  <h4>Empresa</h4>
+                  <h6>Sobre Nós</h6>
+                  <h6>Contato</h6>
+              </div>
+              <div class="footer-contact-info cartoon">
+                  <h4>Entre em Contato</h4>
+                  <h6>*Numero de telefone*</h6>
+                  <h6>*EMAIL*</h6>
+                  <h6>*ENDEREÇO*</h6>
+              </div>
+              <div class="footer-social cartoon">
+                  <h4>Conecte-se Conosco</h4>
+                  <div class="social-icons">
+
+                      <img src"img/instagram.png" alt="Instagram" />
+                      <img src="img/facebook.png" alt="Facebook" />
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="footer-last cartoon">Desenvolvido Por @Mathe0610</div>
+  </footer>-->
+{%endblock%}

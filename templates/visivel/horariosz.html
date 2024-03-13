@@ -1,0 +1,21 @@
+{% extends 'visivel/test.html' %}
+{%block cards%} 
+<h3>Confira nossos profissionais!</h3>
+
+    <div class="menu-card-wrapper">
+        <!-- Massas -->
+        {% for pro in profissionais %}
+        <div class="menu-card-item pizza ativo">
+            <img src="{{ pro.imagem.url }}" width="168" height="168"/>
+            <div class="menu-card-content">
+            <h3>{{ pro.nome }}</h3>
+            <p>
+                {{ pro.especialidade }}
+                <br>
+            </p>
+            <button type="button" class="adicionar-ao-carrinho" data-produto-id="{{ produto.id }}">Ver quadro de hora!</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
