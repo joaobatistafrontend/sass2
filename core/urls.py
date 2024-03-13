@@ -20,8 +20,10 @@ urlpatterns = [
     path('<slug:empresa_slug>/prof/', ProfissionalView.as_view(), name='profissionais'),
     path('<slug:empresa_slug>/servicos/', ServicosViews.as_view(), name='servicos'),
 
-    path('<slug:empresa_slug>/servico/<int:servico_id>/profissionais/', ProfissionaisPorServicoView.as_view(), name='profissionais_list')
-    
+    path('<slug:empresa_slug>/servico/<int:servico_id>/profissionais/', ProfissionaisPorServicoView.as_view(), name='profissionais_list'),
+    path('<slug:empresa_slug>/horarios/', HorarioAtendimentoViwe.as_view(), name='horariosempresa'),
+    path('<slug:empresa_slug>/formhorarios/', AgendamentoView.as_view(), name='agendamento'),
+
 
 ]
 if settings.DEBUG:

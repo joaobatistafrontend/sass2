@@ -1,0 +1,37 @@
+{% extends 'visivel/base.html' %}
+{%block content%} 
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <div class="menu-content">
+          <div class="menu-title-wrapper">
+            <h3>Confira nossos Serviços!</h3>
+          </div>
+              <!-- busca  
+          <div class="menu-filter">
+            <input
+              type="text"
+              class="search-input"
+              placeholder="O que deseja?"
+            />
+            <button class="search-button">Buscar</button>
+          </div>
+             -->
+    <!-- MENU CARDS -->
+  <div class="menu-card-wrapper">
+    <!-- Massas -->
+    {% for hora in horarios %}
+    <div class="menu-card-item pizza ativo">
+        <img src="{{ hora.profissional.imagem.url }}" width="168" height="168"/>
+        <div class="menu-card-content">
+                <p>{{ hora.profissional }}</p>
+                <p>{{ hora.hora_abertura }}</p>
+                <p>{{ hora.duracao_minutos }}</p>
+                <p>{{ hora.get_confirmacao_display  }}</p>
+
+            <button type="button" class="adicionar-ao-carrinho" data-produto-id="{{ produto.id }}">Reserva!</button>
+
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{%endblock%}

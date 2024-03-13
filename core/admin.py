@@ -5,4 +5,4 @@ admin.site.register(Empresa)
 admin.site.register(Servicos)
 admin.site.register(Profissional)
 admin.site.register(HorarioAtendimento)
-
+admin.site.register(ConfirmacaoAgendamento)

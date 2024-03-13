@@ -63,7 +63,22 @@ class Profissional(models.Model):
 
 class HorarioAtendimento(models.Model):
     empresa = models.ForeignKey('Empresa', on_delete=models.CASCADE,null=True, blank=True)
-    hora_abertura = models.TimeField()
-    duracao_minutos = models.IntegerField()
+    profissional = models.ForeignKey('Profissional', on_delete=models.CASCADE,null=True, blank=True)
+    hora_abertura = models.TimeField(null=True, blank=True)
+    duracao_minutos = models.IntegerField(null=True, blank=True)
+    confirmacao = models.BooleanField(default=False,null=True, blank=True)
     def __str__(self):
-        return f'{self.hora_abertura} - {self.duracao_minutos} minutos'
+        return f'{self.profissional} - {self.hora_abertura} - {self.duracao_minutos} minutos -  situação: {self.get_confirmacao_display()}'
+    
+    def get_confirmacao_display(self):
+        return "reservado" if self.confirmacao else "livre"
+    
+class ConfirmacaoAgendamento(models.Model):
+    empresa = models.ForeignKey('Empresa', on_delete=models.CASCADE,null=True, blank=True)
+    horario_atendimento = models.ForeignKey(HorarioAtendimento, on_delete=models.CASCADE, null=True, blank=True)
+    nome_usuario = models.CharField(max_length=100, null=True, blank=True)
+    celular_usuario = models.CharField(max_length=20, null=True, blank=True)
+    data_aniversario_usuario = models.DateField(null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.horario_atendimento} - Cliente: {self.nome_usuario}, Celular: {self.celular_usuario}, Data de Aniversário: {self.data_aniversario_usuario}'    

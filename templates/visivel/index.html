@@ -50,7 +50,9 @@
         <a class="nav-link active" aria-current="page" href="https://getbootstrap.com/docs/5.0/examples/cover/#">Home</a>
         <a class="nav-link" href="{% url 'servicos' empresa_slug=empresa.slug %}">Serviços</a>
         <a class="nav-link" href="{% url 'profissionais' empresa_slug=empresa.slug %}">profissionais</a>
-        
+        <a class="nav-link" href="{% url 'horariosempresa' empresa_slug=empresa.slug %}">horarios</a>
+        <a class="nav-link" href="{% url 'agendamento' empresa_slug=empresa.slug %}">agendamento</a>
+
       </nav>
     </div>
   </header>
