@@ -4,7 +4,7 @@
     <section class="menu" id="menu">
         <div class="menu-content">
           <div class="menu-title-wrapper">
-            <h3>Profissionais por Serviço!</h3>
+            <h3>Confira nossos Serviços!</h3>
           </div>
               <!-- busca  
           <div class="menu-filter">
@@ -18,20 +18,25 @@
              -->
     <!-- MENU CARDS -->
   <div class="menu-card-wrapper">
-    <!-- Massas -->
-    {% for pro in profissionais %}
+    <!-- Massas 
+    {% if horarios_livres %}
+        {% for hora in horarios_livres %}
+
     <div class="menu-card-item pizza ativo">
-          <img src="{{ pro.imagem.url }}" width="168" height="168"/>
+        <img src="{{ hora.profissional.imagem.url }}" width="168" height="168"/>
         <div class="menu-card-content">
-          <h3>{{ pro.nome }}</h3>
-          <p>
-            {{ pro.especialidade }}
-            <br>
-          </p>
-          <button type="button" class="adicionar-ao-carrinho" onclick="location.href='{% url 'horariosoprofissionais' empresa_slug=empresa.slug profissional_id=pro.id %}'">Ver quadro Serviços!</button>
-          
+                <p>{{ hora.profissional }}</p>
+                <p>{{ hora.hora_abertura }}</p>
+                <p>{{ hora.duracao_minutos }}</p>
+                <p>{{ hora.get_confirmacao_display  }}</p>
+
+                <button type="button" class="adicionar-ao-carrinho" onclick="location.href='{% url 'horariosoprofissionais' empresa_slug=empresa.slug profissional_id=profissional_id  %}'">Ver quadro Serviços!</button>
+
         </div>
       </div>
-    {% endfor %}
+        {% endfor %}
+    {% endif %}
+  -->
   </div>
 {%endblock%}
+

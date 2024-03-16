@@ -31,15 +31,14 @@ class ProfissionalView(View):
 class ServicosViews(View):
     def get(self, request, empresa_slug):
         empresa = Empresa.objects.get(slug=empresa_slug)
-        profissionais = Profissional.objects.filter(empresa=empresa)
-        horarios = HorarioAtendimento.objects.filter(empresa=empresa)
         servicos = Servicos.objects.filter(empresa=empresa)
         return render(request, 'visivel/servicos.html',{'empresa':empresa, 'servicos' : servicos})
     
 class ProfissionaisPorServicoView(View):
     def get(self, request, empresa_slug, servico_id):
+        empresa = Empresa.objects.get(slug=empresa_slug)
         profissionais = Profissional.objects.filter(empresa__slug=empresa_slug, especialidade__id=servico_id)
-        return render(request, 'visivel/profissionais_por_servico.html', {'profissionais': profissionais})
+        return render(request, 'visivel/profissionais_por_servico.html', {'empresa':empresa, 'profissionais': profissionais})
     
 
 class HorarioAtendimentoViwe(View):
@@ -55,9 +54,11 @@ class AgendamentoView(View):
         empresa = Empresa.objects.get(slug=empresa_slug)
         profissionais = Profissional.objects.filter(empresa=empresa)
         horarios = HorarioAtendimento.objects.filter(empresa=empresa, confirmacao=False)
-        form = ConfirmacaoAgendamentoForm()  # Adiciona um formulário de confirmação de agendamento
+        
+        # Filtra apenas os horários livres no formulário
+        form = ConfirmacaoAgendamentoForm(horarios=horarios)
 
-        return render(request, 'visivel/formconfim.html', {'empresa': empresa, 'profissionais': profissionais, 'horarios': horarios, 'form': form})
+        return render(request, 'visivel/formconfim.html', {'empresa': empresa, 'profissionais': profissionais, 'form': form})
 
     def post(self, request, empresa_slug):
         empresa = Empresa.objects.get(slug=empresa_slug)
@@ -76,3 +77,45 @@ class AgendamentoView(View):
         else:
             # Se o formulário não for válido, reexibe a página com os erros
             return render(request, 'visivel/horarios.html', {'empresa': empresa, 'profissionais': profissionais, 'horarios': horarios, 'form': form})
+        
+
+
+
+class HorariosPorProfissionalViews(View):
+    def get(self, request, empresa_slug, profissional_id):
+        empresa = Empresa.objects.get(slug=empresa_slug)
+        profissional = Profissional.objects.get(id=profissional_id)
+        horarios_livres = HorarioAtendimento.objects.filter(profissional=profissional,confirmacao=False)
+        form = AgendamentoForm(horarios=horarios_livres)
+
+        return render(request, 'visivel/agendamento_por_profissional.html', {'profissional': profissional, 'form':form,'horarios_livres':horarios_livres, 'empresa': empresa})    
+
+
+''' 
+class AgendamentoPorProfissionalView(View):
+    def get(self, request, empresa_slug, profissional_id):
+        empresa = Empresa.objects.get(slug=empresa_slug)
+        profissional = Profissional.objects.get(id=profissional_id)
+        horarios_livres = HorarioAtendimento.objects.filter(profissional=profissional, confirmacao=False)
+        form = AgendamentoForm()
+
+        return render(request, 'visivel/agendamento_por_profissional.html', {'profissional': profissional, 'form': form, 'empresa': empresa})
+
+  def post(self, request, empresa_slug, profissional_id):
+        empresa = Empresa.objects.get(slug=empresa_slug)
+        profissional = Profissional.objects.get(id=profissional_id)
+        horarios_livres = HorarioAtendimento.objects.filter(profissional=profissional, confirmacao=False)
+        form = AgendamentoForm(request.POST)
+
+        if form.is_valid():
+            agendamento = form.save(commit=False)
+            agendamento.profissional = profissional
+            agendamento.save()
+
+            horario_selecionado = form.cleaned_data['horario_selecionado']
+            horario_selecionado.confirmacao = True
+            horario_selecionado.save()
+
+            return redirect('sucesso_agendamento')
+
+        return render(request, 'visivel/agendamento_por_profissional.html', {'profissional': profissional, 'horarios_livres': horarios_livres, 'form': form, 'empresa': empresa})'''

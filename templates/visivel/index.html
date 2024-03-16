@@ -47,7 +47,9 @@
     <div>
       <h3 class="float-md-start mb-0">{{ empresa.nome }}</h3>
       <nav class="nav nav-masthead justify-content-center float-md-end">
-        <a class="nav-link active" aria-current="page" href="https://getbootstrap.com/docs/5.0/examples/cover/#">Home</a>
+         <!--
+   <a class="nav-link active" aria-current="page" href="{% url 'home' empresa_slug=empresa.slug %}">Home</a>    </p> -->
+
         <a class="nav-link" href="{% url 'servicos' empresa_slug=empresa.slug %}">Serviços</a>
         <a class="nav-link" href="{% url 'profissionais' empresa_slug=empresa.slug %}">profissionais</a>
         <a class="nav-link" href="{% url 'horariosempresa' empresa_slug=empresa.slug %}">horarios</a>

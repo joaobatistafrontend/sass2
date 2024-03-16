@@ -1,0 +1,57 @@
+{% extends 'visivel/base.html' %}
+{% block content %}
+<!-- Menu Section -->
+   <!--
+<section class="menu" id="menu">
+    <div class="menu-content">
+        <div class="menu-title-wrapper">
+            <h3>Agendamento para {{ profissional.nome }}</h3>
+        </div>
+  
+        <div class="menu-card-wrapper">
+            
+            {% if horarios_livres %}
+            <div class="menu-card-item pizza ativo">
+                    <div class="menu-card-content">
+                        <p>{{ horario.hora_abertura }}</p>
+                        <p>{{ horario.duracao_minutos }} minutos</p>
+                        <p>{{ horario.get_confirmacao_display }}</p>
+                        <form method="post">{% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit">Agendar</button>
+                        </form>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    
+</section>
+-->
+
+<div class="menu-card-wrapper">
+    
+    {% if horarios_livres %}
+    <div class="menu-card-item pizza ativo">
+        <div class="menu-card-content">
+            <div class="menu-content">
+                <div class="menu-title-wrapper">
+                    <img src="{{ profissional.imagem.url }}" width="168" height="168"/>
+                    <h3>Agendamento para {{ profissional.nome }}</h3>
+
+                </div>
+          
+
+            <p>{{ horario.hora_abertura }}</p>
+            <p>{{ horario.duracao_minutos }} minutos</p>
+            <p>{{ horario.get_confirmacao_display }}</p>
+            <form method="post">{% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Agendar</button>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}
