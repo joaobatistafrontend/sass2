@@ -8,6 +8,8 @@ from PIL import Image
 class Empresa(models.Model):
     dono = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     nome = models.CharField(max_length=100)
+    imagem = models.ImageField(upload_to='imagens/',blank=True, null=True)
+
     descricao = models.TextField(null=True, blank=True)
     slug = models.SlugField(unique=True, null=True, blank=True)
 
@@ -35,6 +37,7 @@ class Servicos(models.Model):
     empresa = models.ForeignKey('Empresa', on_delete=models.CASCADE, null=True, blank=True)
     servico = models.CharField(max_length=100, null=True, blank=True)
     imagem = models.ImageField(upload_to='imagens/',blank=True, null=True)
+    descricao = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return f'{self.servico}'

@@ -14,10 +14,11 @@ from django.views.generic.edit import FormView
 class HomeViews(View):
     def get(self, request, empresa_slug):
         empresa = Empresa.objects.get(slug=empresa_slug)
+        servicos = Servicos.objects.filter(empresa=empresa)
         profissionais = Profissional.objects.filter(empresa=empresa)
         horarios = HorarioAtendimento.objects.filter(empresa=empresa)
 
-        return render(request, 'visivel/index.html',{'empresa':empresa})
+        return render(request, 'visivel/index.html',{'empresa':empresa,  'servicos' : servicos, 'profissionais' : profissionais})
 
 class ProfissionalView(View):
     def get(self, request, empresa_slug):
